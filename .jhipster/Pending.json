@@ -1,0 +1,21 @@
+{
+  "fields": [
+    {
+      "fieldName": "generatedToken",
+      "fieldType": "String",
+      "fieldValidateRules": ["unique"]
+    },
+    {
+      "fieldName": "tokenReference",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [],
+  "service": "serviceClass",
+  "dto": "mapstruct",
+  "jpaMetamodelFiltering": false,
+  "readOnly": false,
+  "pagination": "no",
+  "name": "Pending",
+  "changelogDate": "20220817182721"
+}

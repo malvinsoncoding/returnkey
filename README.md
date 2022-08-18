@@ -1,23 +1,75 @@
 # returnkeyapp
 
-This application was generated using JHipster 7.5.0, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v7.5.0](https://www.jhipster.tech/documentation-archive/v7.5.0).
+## Details
 
-## Project Structure
+- This application uses Postgresql as database
+  - For more information regarding the database connection, username, etc. can refer to file application-dev.yml or application-prod.yml
+  - database name: r_key
+- The database tables will be automatically created while running the application
+- Port of the application is :8080
 
-Node is required for generation and recommended for development. `package.json` is always generated for a better development experience with prettier, commit hooks, scripts and so on.
+## Execute API
 
-In the project root, JHipster generates configuration files for tools like git, prettier, eslint, husk, and others that are well known and you can find references in the web.
+To create pending task and get the generated token from Postman, run:
 
-`/src/*` structure follows default Java structure.
+```
+http://localhost:8080/api/pending/returns
 
-- `.yo-rc.json` - Yeoman configuration file
-  JHipster configuration is stored in this file at `generator-jhipster` key. You may find `generator-jhipster-*` for specific blueprints configuration.
-- `.yo-resolve` (optional) - Yeoman conflict resolver
-  Allows to use a specific action when conflicts are found skipping prompts for files that matches a pattern. Each line should match `[pattern] [action]` with pattern been a [Minimatch](https://github.com/isaacs/minimatch#minimatch) pattern and action been one of skip (default if ommited) or force. Lines starting with `#` are considered comments and are ignored.
-- `.jhipster/*.json` - JHipster entity configuration files
-- `npmw` - wrapper to use locally installed npm.
-  JHipster installs Node and npm locally using the build tool by default. This wrapper makes sure npm is installed locally and uses it avoiding some differences different versions can cause. By using `./npmw` instead of the traditional `npm` you can configure a Node-less environment to develop or test your application.
-- `/src/main/docker` - Docker configurations for the application and services that the application depends on
+Method: POST
+Params: orderId, emailAddress
+```
+
+To create pending task and get the generated token from cURL, run:
+
+```
+curl --location -g --request POST 'http://localhost:8080/api/pending/returns?orderId={orderId}&emailAddress={emailAddress}'
+```
+
+To add the Return from Postman, run:
+
+```
+http://localhost:8080/api/returns
+
+Method: POST
+Params: generatedToken
+```
+
+To add the Return from cURL, run:
+
+```
+curl --location -g --request POST 'http://localhost:8080/api/returns?generatedToken={generatedToken}'
+```
+
+To get the Return from Postman, run:
+
+```
+http://localhost:8080/api/returns/:id
+
+Method: GET
+Params: id
+```
+
+To get the Return from cURL, run:
+
+```
+curl --location -g --request GET 'http://localhost:8080/api/returns/{id}'
+```
+
+To update QC Status from Postman, run:
+
+```
+http://localhost:8080/api/returns/:id/items/:itemId/qc/status
+
+Method: PUT
+PathVariable: id, itemId
+Param: qcStatus (ACCEPTED, REJECTED)
+```
+
+To update QC Status from cURL, run:
+
+```
+curl --location -g --request PUT 'http://localhost:8080/api/returns/{id}/items/{itemId}/qc/status?qcStatus={qcStatus}'
+```
 
 ## Development
 
@@ -25,16 +77,6 @@ To start your application in the dev profile, run:
 
 ```
 ./mvnw
-```
-
-For further instructions on how to develop with JHipster, have a look at [Using JHipster in development][].
-
-### JHipster Control Center
-
-JHipster Control Center can help you manage and control your application(s). You can start a local control center server (accessible on http://localhost:7419) with:
-
-```
-docker-compose -f src/main/docker/jhipster-control-center.yml up
 ```
 
 ## Building for production
@@ -52,8 +94,6 @@ To ensure everything worked, run:
 ```
 java -jar target/*.jar
 ```
-
-Refer to [Using JHipster in production][] for more details.
 
 ### Packaging as war
 
@@ -81,11 +121,7 @@ Sonar is used to analyse code quality. You can start a local Sonar server (acces
 docker-compose -f src/main/docker/sonar.yml up -d
 ```
 
-Note: we have turned off authentication in [src/main/docker/sonar.yml](src/main/docker/sonar.yml) for out of the box experience while trying out SonarQube, for real use cases turn it back on.
-
-You can run a Sonar analysis with using the [sonar-scanner](https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner) or by using the maven plugin.
-
-Then, run a Sonar analysis:
+run a Sonar analysis:
 
 ```
 ./mvnw -Pprod clean verify sonar:sonar
@@ -97,13 +133,7 @@ If you need to re-run the Sonar phase, please be sure to specify at least the `i
 ./mvnw initialize sonar:sonar
 ```
 
-For more information, refer to the [Code quality page][].
-
 ## Using Docker to simplify development (optional)
-
-You can use Docker to improve your JHipster development experience. A number of docker-compose configuration are available in the [src/main/docker](src/main/docker) folder to launch required third party services.
-
-For example, to start a postgresql database in a docker container, run:
 
 ```
 docker-compose -f src/main/docker/postgresql.yml up -d
@@ -127,20 +157,3 @@ Then run:
 ```
 docker-compose -f src/main/docker/app.yml up -d
 ```
-
-For more information refer to [Using Docker and Docker-Compose][], this page also contains information on the docker-compose sub-generator (`jhipster docker-compose`), which is able to generate docker configurations for one or several JHipster applications.
-
-## Continuous Integration (optional)
-
-To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`), this will let you generate configuration files for a number of Continuous Integration systems. Consult the [Setting up Continuous Integration][] page for more information.
-
-[jhipster homepage and latest documentation]: https://www.jhipster.tech
-[jhipster 7.5.0 archive]: https://www.jhipster.tech/documentation-archive/v7.5.0
-[using jhipster in development]: https://www.jhipster.tech/documentation-archive/v7.5.0/development/
-[using docker and docker-compose]: https://www.jhipster.tech/documentation-archive/v7.5.0/docker-compose
-[using jhipster in production]: https://www.jhipster.tech/documentation-archive/v7.5.0/production/
-[running tests page]: https://www.jhipster.tech/documentation-archive/v7.5.0/running-tests/
-[code quality page]: https://www.jhipster.tech/documentation-archive/v7.5.0/code-quality/
-[setting up continuous integration]: https://www.jhipster.tech/documentation-archive/v7.5.0/setting-up-ci/
-[node.js]: https://nodejs.org/
-[npm]: https://www.npmjs.com/

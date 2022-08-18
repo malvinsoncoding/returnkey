@@ -41,6 +41,8 @@
     "clientThemeVariant": "",
     "withAdminUi": true,
     "enableGradleEnterprise": false,
-    "languages": ["en", "fr"]
+    "languages": ["en", "fr"],
+    "lastLiquibaseTimestamp": 1660761950000,
+    "entities": ["Pending", "Returns", "Order"]
   }
 }

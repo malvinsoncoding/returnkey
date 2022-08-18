@@ -1,0 +1,37 @@
+{
+  "fields": [
+    {
+      "fieldName": "totalAmount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "returnStatus",
+      "fieldType": "ReturnStatus",
+      "fieldValues": "AWAITING_APPROVAL,COMPLETE"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipName": "order",
+      "otherEntityName": "order",
+      "relationshipType": "one-to-many",
+      "otherEntityRelationshipName": "returns"
+    },
+    {
+      "relationshipName": "pending",
+      "otherEntityName": "pending",
+      "relationshipType": "one-to-one",
+      "otherEntityField": "id",
+      "ownerSide": true,
+      "id": false,
+      "otherEntityRelationshipName": "returns"
+    }
+  ],
+  "service": "serviceClass",
+  "dto": "mapstruct",
+  "jpaMetamodelFiltering": false,
+  "readOnly": false,
+  "pagination": "no",
+  "name": "Returns",
+  "changelogDate": "20220817182916"
+}

@@ -1,0 +1,56 @@
+{
+  "fields": [
+    {
+      "fieldName": "orderId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "emailAddress",
+      "fieldType": "String",
+      "fieldValidateRules": ["pattern"],
+      "fieldValidateRulesPattern": "(^(.+)@(\\\\S+)$)"
+    },
+    {
+      "fieldName": "sku",
+      "fieldType": "String",
+      "fieldValidateRules": ["unique"]
+    },
+    {
+      "fieldName": "quantity",
+      "fieldType": "Long",
+      "fieldValidateRules": ["min"],
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "price",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": ["min"],
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "itemName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "qcStatus",
+      "fieldType": "QcStatus",
+      "fieldValues": "ACCEPTED,REJECTED"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipName": "returns",
+      "otherEntityName": "returns",
+      "relationshipType": "many-to-one",
+      "otherEntityField": "id"
+    }
+  ],
+  "service": "serviceClass",
+  "dto": "mapstruct",
+  "jpaMetamodelFiltering": false,
+  "readOnly": false,
+  "pagination": "no",
+  "entityTableName": "jhi_order",
+  "name": "Order",
+  "changelogDate": "20220817184550"
+}
